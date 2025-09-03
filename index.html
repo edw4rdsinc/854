@@ -43,6 +43,12 @@
             transform: scale(1.05);
         }
         
+        /* Fix for landscape images that should be portrait */
+        .rotate-90 img {
+            /* This rotates the image 90 degrees. object-fit:cover will handle the scaling */
+            transform: rotate(90deg);
+        }
+
         /* New, more varied layout for your 15 photos */
         /* 4 Portraits (3x4 aspect ratio) */
         .collage-item:nth-child(1) { grid-column: span 3; grid-row: span 4; }
@@ -72,6 +78,16 @@
         .modal-active {
             display: flex;
         }
+
+        /* Widescreen Optimizations */
+        @media (min-width: 1536px) { /* Tailwind CSS 2xl breakpoint */
+            .collage-bg {
+                /* Use larger grid cells on very wide screens */
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                grid-auto-rows: 160px;
+                gap: 12px;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -84,7 +100,7 @@
         <div class="collage-item"><img src="images/cow-4.jpg" alt="Tillamook cow"></div>
         <div class="collage-item"><img src="images/cow-1.jpg" alt="Tillamook cow"></div>
         <div class="collage-item"><img src="images/cow-6.jpg" alt="Tillamook cow"></div>
-        <div class="collage-item"><img src="images/sunset1.png" alt="Tillamook sunset"></div>
+        <div class="collage-item rotate-90"><img src="images/sunset1.png" alt="Tillamook sunset"></div>
         <div class="collage-item"><img src="images/cow-2.jpg" alt="Tillamook cow"></div>
         <div class="collage-item"><img src="images/cow-3.jpg" alt="Tillamook cow"></div>
         <div class="collage-item"><img src="images/sunset2.png" alt="Tillamook sunset"></div>
@@ -92,7 +108,7 @@
         <div class="collage-item"><img src="images/flowers.png" alt="Flowers in Tillamook"></div>
         <div class="collage-item"><img src="images/cows7.jpg" alt="Tillamook cows"></div>
         <div class="collage-item"><img src="images/cow-10.jpg" alt="Tillamook cow"></div>
-        <div class="collage-item"><img src="images/cow-8.png" alt="Tillamook cow"></div>
+        <div class="collage-item rotate-90"><img src="images/cow-8.png" alt="Tillamook cow"></div>
         <div class="collage-item"><img src="images/boats-2.jpg" alt="Boats in Tillamook"></div>
     </div>
 
@@ -111,14 +127,14 @@
 
         <!-- Main Content -->
         <main class="flex-grow flex flex-col items-center justify-center text-center p-4">
-            <div class="bg-white/50 backdrop-blur-lg rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-md w-full text-gray-800">
+            <div class="bg-white/50 backdrop-blur-lg rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-md md:max-w-lg xl:max-w-2xl w-full text-gray-800">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">Want to know what's going on in Tillamook?</h2>
                 <p class="text-xl sm:text-2xl mb-6 font-bold">Ask the cows!</p>
                 
                 <!-- QR Code with less transparent background -->
                 <div class="flex justify-center mb-4">
                     <div class="bg-white/90 p-2 sm:p-3 rounded-2xl shadow-lg">
-                        <img src="https://placehold.co/288x288/ffffff/000000?text=Your+QR+Code+Here" alt="QR Code to text 854-COWS" class="rounded-lg w-64 h-64 sm:w-72 sm:h-72">
+                        <img src="images/854_Cows.png" alt="QR Code to text 854-COWS" class="rounded-lg w-64 h-64 sm:w-72 sm:h-72">
                     </div>
                 </div>
 
@@ -236,5 +252,7 @@
 
 </body>
 </html>
+
+
 
 
