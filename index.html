@@ -3,575 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO & Social Media Meta Tags -->
-    <title>854 COWS - Ask the Cows About Tillamook!</title>
-    <meta name="description" content="Text 854-COWS (541-854-2697) for instant Tillamook info. Restaurant specials, events, tide times, and more - all by SMS. No app needed!">
-    <meta name="keywords" content="Tillamook, Oregon, SMS, text service, local information, restaurants, events, 854COWS">
-    
-    <!-- Open Graph for Facebook/Social -->
-    <meta property="og:title" content="854 COWS - Your Tillamook Text Concierge">
-    <meta property="og:description" content="Text questions about Tillamook to 854-COWS and get instant answers!">
-    <meta property="og:image" content="https://854cows.com/images/og-image.jpg">
-    <meta property="og:url" content="https://854cows.com">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="854 COWS - Ask the Cows About Tillamook!">
-    <meta name="twitter:description" content="Text 854-COWS for instant Tillamook info!">
-    <meta name="twitter:image" content="https://854cows.com/images/twitter-card.jpg">
-    
-    <!-- Mobile App Meta -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <title>854 COWS - Your Friendly Neighborhood Guide to Tillamook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
-            background: #0a0a0a;
-            color: white;
-            overflow-x: hidden;
-            position: relative;
+            font-family: 'Inter', sans-serif;
         }
-
-        /* Loading Animation */
-        .loading-screen {
-            position: fixed;
+        /* Custom styles for the photo collage */
+        .collage-bg {
+            display: grid;
+            /* Using a finer grid for more shape variety */
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-auto-rows: 120px;
+            grid-auto-flow: dense;
+            gap: 8px;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-screen.loaded {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .cow-loader {
-            font-size: 48px;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: 30px;
-            padding: 10px 24px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav:hover {
-            background: rgba(255, 255, 255, 0.98);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-        }
-
-        .nav a {
-            color: #1a1a1a;
-            text-decoration: none;
-            margin: 0 12px;
-            font-weight: 500;
-            font-size: 14px;
-            letter-spacing: 0.3px;
-            transition: color 0.2s ease;
-        }
-
-        .nav a:hover {
-            color: #2563eb;
-        }
-
-        /* Photo Grid with Animation */
-        .photo-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            grid-auto-rows: minmax(150px, 200px);
-            gap: 4px;
-            z-index: 1;
-            animation: slowZoom 30s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-
-        .photo {
-            position: relative;
+            z-index: -1;
+            filter: brightness(0.6); /* Darken the background to make text pop */
             overflow: hidden;
-            opacity: 0;
-            animation: fadeIn 0.8s ease forwards;
         }
-
-        .photo:nth-child(1) { animation-delay: 0.1s; }
-        .photo:nth-child(2) { animation-delay: 0.2s; }
-        .photo:nth-child(3) { animation-delay: 0.3s; }
-        .photo:nth-child(4) { animation-delay: 0.4s; }
-        .photo:nth-child(5) { animation-delay: 0.5s; }
-        .photo:nth-child(6) { animation-delay: 0.6s; }
-        .photo:nth-child(7) { animation-delay: 0.7s; }
-        .photo:nth-child(8) { animation-delay: 0.8s; }
-        .photo:nth-child(9) { animation-delay: 0.9s; }
-        .photo:nth-child(10) { animation-delay: 1s; }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .collage-item {
+            overflow: hidden;
+            border-radius: 8px;
         }
-
-        .photo img {
+        .collage-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease, filter 0.6s ease;
-            filter: brightness(0.7);
+            transition: transform 0.3s ease;
         }
-
-        .photo:hover img {
-            transform: scale(1.1);
-            filter: brightness(0.85);
+        .collage-item:hover img {
+            transform: scale(1.05);
         }
+        
+        /* New, more varied layout for your 15 photos */
+        /* 4 Portraits (3x4 aspect ratio) */
+        .collage-item:nth-child(1) { grid-column: span 3; grid-row: span 4; }
+        .collage-item:nth-child(6) { grid-column: span 3; grid-row: span 4; }
+        .collage-item:nth-child(11) { grid-column: span 3; grid-row: span 4; }
+        .collage-item:nth-child(14) { grid-column: span 3; grid-row: span 4; }
 
-        /* Special grid items */
-        .photo:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-        .photo:nth-child(4) { grid-column: span 2; }
-        .photo:nth-child(7) { grid-row: span 2; }
-        .photo:nth-child(10) { grid-column: span 2; grid-row: span 2; }
+        /* 3 Large Landscapes */
+        .collage-item:nth-child(2) { grid-column: span 4; grid-row: span 2; }
+        .collage-item:nth-child(9) { grid-column: span 4; grid-row: span 2; }
+        .collage-item:nth-child(15) { grid-column: span 4; grid-row: span 2; }
+        
+        /* 5 Squares (2 medium, 3 small) */
+        .collage-item:nth-child(3) { grid-column: span 2; grid-row: span 2; } /* Medium */
+        .collage-item:nth-child(8) { grid-column: span 2; grid-row: span 2; } /* Medium */
+        /* Children 5, 7, 12 are small 1x1 squares by default */
 
-        /* Content Overlay */
-        .content-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
-            z-index: 10;
+        /* 3 Small Landscapes */
+        .collage-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+        .collage-item:nth-child(10) { grid-column: span 2; grid-row: span 1; }
+        .collage-item:nth-child(13) { grid-column: span 2; grid-row: span 1; }
+
+        /* Modal styles */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-active {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            animation: fadeInContent 1.5s ease;
-        }
-
-        @keyframes fadeInContent {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Typography with Animation */
-        .headline {
-            font-size: clamp(32px, 6vw, 56px);
-            font-weight: 800;
-            margin-bottom: 16px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            animation: slideDown 0.8s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .subheadline {
-            font-size: clamp(20px, 3.5vw, 28px);
-            margin-bottom: 32px;
-            color: #e5e5e5;
-            font-weight: 400;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            animation: slideDown 0.8s ease 0.2s both;
-        }
-
-        /* Enhanced QR Container */
-        .qr-container {
-            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
-            padding: 32px;
-            border-radius: 24px;
-            margin: 24px 0;
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.3),
-                0 0 80px rgba(255,255,255,0.1);
-            position: relative;
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 80px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 100px rgba(255,255,255,0.2); }
-        }
-
-        .qr-container::before {
-            content: "🐄";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 40px;
-            animation: wiggle 2s ease-in-out infinite;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: translateX(-50%) rotate(0deg); }
-            25% { transform: translateX(-50%) rotate(-5deg); }
-            75% { transform: translateX(-50%) rotate(5deg); }
-        }
-
-        #qrcode {
-            margin-bottom: 16px;
-        }
-
-        .qr-text {
-            color: #1a1a1a;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .qr-easter-egg {
-            color: #9ca3af;
-            font-size: 11px;
-            margin-top: 8px;
-            opacity: 0.7;
-        }
-
-        /* Phone Number with Animation */
-        .phone-number {
-            font-size: clamp(24px, 4.5vw, 32px);
-            color: #fbbf24;
-            font-weight: 700;
-            margin: 20px 0;
-            text-shadow: 
-                0 0 30px rgba(251, 191, 36, 0.5),
-                0 2px 4px rgba(0,0,0,0.8);
-            letter-spacing: 0.5px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 30px rgba(251, 191, 36, 0.5), 0 2px 4px rgba(0,0,0,0.8); }
-            to { text-shadow: 0 0 40px rgba(251, 191, 36, 0.7), 0 2px 4px rgba(0,0,0,0.8); }
-        }
-
-        /* Example Queries with Stagger Animation */
-        .examples {
-            max-width: 700px;
-            margin-top: 32px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .example-query {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 15px;
-            color: #f3f4f6;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            animation: slideUp 0.6s ease both;
-            cursor: default;
-        }
-
-        .example-query:nth-child(1) { animation-delay: 0.9s; }
-        .example-query:nth-child(2) { animation-delay: 1s; }
-        .example-query:nth-child(3) { animation-delay: 1.1s; }
-        .example-query:nth-child(4) { animation-delay: 1.2s; }
-        .example-query:nth-child(5) { animation-delay: 1.3s; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .example-query:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            .photo-grid {
-                grid-template-columns: repeat(3, 1fr);
-                grid-auto-rows: 140px;
-                gap: 2px;
-            }
-
-            .photo:nth-child(1),
-            .photo:nth-child(4),
-            .photo:nth-child(7),
-            .photo:nth-child(10) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .nav {
-                top: 12px;
-                right: 12px;
-                padding: 8px 16px;
-            }
-
-            .nav a {
-                margin: 0 8px;
-                font-size: 13px;
-            }
-
-            .qr-container {
-                padding: 24px;
-                margin: 16px;
-                width: calc(100% - 32px);
-                max-width: 320px;
-            }
-
-            .examples {
-                padding: 0 16px;
-            }
-
-            .example-query {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .photo-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 120px;
-            }
-
-            .headline {
-                padding: 0 20px;
-            }
-        }
-
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .nav {
-                background: rgba(30, 30, 30, 0.92);
-            }
-            
-            .nav a {
-                color: #e5e5e5;
-            }
         }
     </style>
 </head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="cow-loader">🐄</div>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Photo Collage Background -->
+    <div class="collage-bg">
+        <!-- Your images are now in the collage! -->
+        <div class="collage-item"><img src="images/boats.jpg" alt="Boats in Tillamook"></div>
+        <div class="collage-item"><img src="images/74.jpg" alt="Tillamook landscape"></div>
+        <div class="collage-item"><img src="images/cow-4.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/cow-1.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/cow-6.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/sunset1.png" alt="Tillamook sunset"></div>
+        <div class="collage-item"><img src="images/cow-2.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/cow-3.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/sunset2.png" alt="Tillamook sunset"></div>
+        <div class="collage-item"><img src="images/cow-5.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/flowers.png" alt="Flowers in Tillamook"></div>
+        <div class="collage-item"><img src="images/cows7.jpg" alt="Tillamook cows"></div>
+        <div class="collage-item"><img src="images/cow-10.jpg" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/cow-8.png" alt="Tillamook cow"></div>
+        <div class="collage-item"><img src="images/boats-2.jpg" alt="Boats in Tillamook"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <a href="/terms">Terms</a>
-        <a href="/privacy">Privacy</a>
-        <a href="#about">About</a>
-    </nav>
+    <div class="relative min-h-screen flex flex-col items-center justify-center text-white">
 
-    <div class="container">
-        <!-- Photo Grid Background -->
-        <div class="photo-grid">
-            <div class="photo">
-                <img src="cow-1.jpg" alt="Tillamook dairy cow grazing" loading="lazy">
+        <!-- Header -->
+        <header class="absolute top-0 left-0 right-0 p-4 bg-black bg-opacity-20 backdrop-blur-sm">
+            <div class="container mx-auto flex justify-end items-center">
+                <nav class="space-x-4">
+                    <button onclick="openModal('aboutModal')" class="hover:underline">About</button>
+                    <button onclick="openModal('privacyModal')" class="hover:underline">Privacy</button>
+                    <button onclick="openModal('termsModal')" class="hover:underline">Terms</button>
+                </nav>
             </div>
-            <div class="photo">
-                <img src="sunset1.png" alt="Stunning Tillamook sunset" loading="lazy">
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex flex-col items-center justify-center text-center p-4">
+            <div class="bg-white/50 backdrop-blur-lg rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-md w-full text-gray-800">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Want to know what's going on in Tillamook?</h2>
+                <p class="text-xl sm:text-2xl mb-6 font-bold">Ask the cows!</p>
+                
+                <!-- QR Code with less transparent background -->
+                <div class="flex justify-center mb-4">
+                    <div class="bg-white/90 p-2 sm:p-3 rounded-2xl shadow-lg">
+                        <img src="https://placehold.co/288x288/ffffff/000000?text=Your+QR+Code+Here" alt="QR Code to text 854-COWS" class="rounded-lg w-64 h-64 sm:w-72 sm:h-72">
+                    </div>
+                </div>
+
+                <p class="font-bold text-xl">Or text "hello" to</p>
+                <p class="text-3xl font-bold tracking-wider text-green-700">(541) 854-COWS</p>
+                <p class="text-sm text-gray-500">(541-854-2697)</p>
             </div>
-            <div class="photo">
-                <img src="boats.jpg" alt="Fishing boats in Tillamook Bay" loading="lazy">
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full p-4 text-center text-sm">
+            © 2024 854cows.com - Your Friendly Neighborhood Cow
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 hidden" onclick="closeModal('aboutModal')">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full m-4 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-6 border-b">
+                <h3 class="text-2xl font-bold">🐄 About 854 COWS</h3>
             </div>
-            <div class="photo">
-                <img src="cow-2.jpg" alt="Happy cow in Tillamook pasture" loading="lazy">
+            <div class="p-6 space-y-4">
+                <p class="font-bold text-lg">"Your Friendly Neighborhood Cow" - This perfectly captures the project's soul.</p>
+                <p>854 COWS is a love letter to Tillamook County. It's a simple tool built on the idea that technology should connect us to our community, not distract us from it. No apps, no logins, no barriers. Just text a question, and get a helpful answer from the friendliest cows on the Oregon Coast.</p>
+                
+                <div>
+                    <h4 class="font-bold text-xl mt-4 mb-2">Our Core Values</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Simplicity Over Complexity:</strong> If you can text, you can use 854 COWS. It's that easy.</li>
+                        <li><strong>Community Over Commerce:</strong> This is a free resource for locals, tourists, and businesses. We're here to connect people, not to build a sales funnel.</li>
+                        <li><strong>Authenticity Over Generic Tech:</strong> We're proudly Tillamook, not Silicon Valley. We celebrate local knowledge and local character.</li>
+                        <li><strong>Access Over Barriers:</strong> Works on any phone that can text. We aim to bridge the digital divide, not widen it.</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="font-bold text-xl mt-4 mb-2">The Vision</h4>
+                     <p>854 COWS is a model for community-centered technology. It asks: What if technology made places MORE local, not less? What if the barrier to community information was zero? We believe technology can serve communities without exploiting them, and we're starting right here in Tillamook.</p>
+                </div>
             </div>
-            <div class="photo">
-                <img src="01-optimized.png" alt="Tillamook countryside view" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cow-3.jpg" alt="Brown Swiss cow portrait" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="flowers.png" alt="Wildflowers of Tillamook" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cow-4.jpg" alt="Dairy cows at sunset" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="boats-2.jpg" alt="Tillamook Bay marina" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cow-5.jpg" alt="Tillamook Valley dairy farm" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="74.jpg" alt="Scenic Tillamook landscape" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cow-6.jpg" alt="Holstein cow close-up" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="susnet2.png" alt="Golden hour in Tillamook" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cows7.jpg" alt="Herd of Tillamook cows" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cow-8.png" alt="Cow in morning mist" loading="lazy">
-            </div>
-            <div class="photo">
-                <img src="cow-10.jpg" alt="Happy Tillamook cattle" loading="lazy">
+            <div class="p-4 bg-gray-50 border-t text-right">
+                <button onclick="closeModal('aboutModal')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Close</button>
             </div>
         </div>
+    </div>
 
-        <!-- Content Overlay -->
-        <div class="content-overlay">
-            <h1 class="headline">Want to know what's happening in Tillamook?</h1>
-            <h2 class="subheadline">Ask the cows! 🐄</h2>
-            
-            <div class="qr-container">
-                <canvas id="qrcode"></canvas>
-                <div class="qr-text">Scan to save 854 COWS to your contacts</div>
-                <div class="qr-easter-egg">Fun fact: We have exactly 854 cows on speed dial</div>
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 hidden" onclick="closeModal('privacyModal')">
+         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full m-4 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-6 border-b">
+                <h3 class="text-2xl font-bold">Privacy Policy</h3>
             </div>
+            <div class="p-6 space-y-4">
+                <p>We take your privacy seriously. Here's our simple promise:</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>We only store your phone number to communicate with you via SMS.</li>
+                    <li>We do not share your phone number or conversation history with any third parties.</li>
+                    <li>The content of your messages is used only to understand your request and provide a relevant answer.</li>
+                    <li>We may analyze anonymized query data (e.g., "what are the tide times?") to improve the service, but this data is never linked to your personal phone number.</li>
+                    <li>This is a community project. We are not in the business of selling data.</li>
+                </ul>
+            </div>
+            <div class="p-4 bg-gray-50 border-t text-right">
+                <button onclick="closeModal('privacyModal')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Close</button>
+            </div>
+        </div>
+    </div>
 
-            <div class="phone-number">Text 541-854-COWS</div>
-
-            <div class="examples">
-                <div class="example-query">"what's for dinner tonight?"</div>
-                <div class="example-query">"any live music this weekend?"</div>
-                <div class="example-query">"when's high tide tomorrow?"</div>
-                <div class="example-query">"where's the best coffee?"</div>
-                <div class="example-query">"what's the weather like?"</div>
+    <!-- Terms Modal -->
+    <div id="termsModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 hidden" onclick="closeModal('termsModal')">
+         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full m-4 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-6 border-b">
+                <h3 class="text-2xl font-bold">Terms of Service</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <p>By using the 854 COWS SMS service, you agree to the following terms:</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>The service is provided "as is" and for informational purposes only. While we strive for accuracy, we cannot guarantee all information is correct or up-to-date.</li>
+                    <li>Do not use this service for emergencies. For any emergency, please dial 911.</li>
+                    <li>Standard message and data rates may apply from your carrier.</li>
+                    <li>The service is intended for reasonable, good-faith inquiries. We reserve the right to block users who abuse the service (e.g., spamming, harassment).</li>
+                    <li>These terms may be updated from time to time. Continued use of the service constitutes acceptance of the new terms.</li>
+                </ul>
+            </div>
+            <div class="p-4 bg-gray-50 border-t text-right">
+                <button onclick="closeModal('termsModal')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Close</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Enhanced vCard with Easter Eggs
-        function generateVCard() {
-            const vCardData = `BEGIN:VCARD
-VERSION:3.0
-N:COWS;854;;;
-FN:854 COWS
-TEL;TYPE=CELL:+15418542697
-EMAIL:tilly@854cows.com
-URL:https://854cows.com
-ORG:Tillamook Text Concierge
-TITLE:Your Friendly Neighborhood Cows
-NOTE:Got questions about Tillamook? Just text me!
-
-Try asking:
-🍕 'What restaurants are open?'
-🌊 'When is high tide?'
-🎉 'What events are happening?'
-☀️ 'What's the weather?'
-🐄 'Tell me a cow joke!'
-
-Fun Facts:
-• We know all 854 cows by name
-• Favorite grass: Timothy
-• Mood: Usually excellent
-
-Moo-re info at 854cows.com
-END:VCARD`;
-
-            return vCardData;
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            modal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
-        // Create Enhanced QR Code with Laughing Cow
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hide loading screen after images start loading
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('loaded');
-            }, 500);
-
-            const qrCodeElement = document.getElementById('qrcode');
-            
-            // Generate QR code with higher error correction for center logo
-            new QRCode(qrCodeElement, {
-                text: generateVCard(),
-                width: 280,
-                height: 280,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H // High error correction (30%) allows for center logo
-            });
-        });
-
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Lazy load images for performance
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-                imageObserver.observe(img);
-            });
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('hidden');
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = 'auto';
         }
+
+        // Close modal on escape key press
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeModal('aboutModal');
+                closeModal('privacyModal');
+                closeModal('termsModal');
+            }
+        });
     </script>
+
 </body>
 </html>
+
+
