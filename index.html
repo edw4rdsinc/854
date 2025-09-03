@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>854 COWS - Your Friendly Neighborhood Guide to Tillamook</title>
+    <title>854 COWS - Your Friendly Neighborhood Info Service</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,260 +11,97 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #2d3748; /* Fallback for when image is loading */
+            background-color: #1a202c;
+        }
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             background-image: url('images/sunset2.png');
             background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
+            background-position: center;
         }
-        /* Dark overlay to ensure text on top is readable */
-        .background-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 0;
-        }
-
-        /* Container for all floating elements */
-        .floating-photos-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .floating-photo {
+        .photo-float {
             position: absolute;
-            border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: float 15s ease-in-out infinite alternate;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            animation: float 15s ease-in-out infinite;
+            transition: transform 0.3s ease-in-out;
         }
-
-        .floating-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .floating-photo:hover {
-            transform: scale(1.15) !important;
+        .photo-float:hover {
+            transform: scale(1.05);
             z-index: 10;
         }
-
-        /* Keyframe animation for the floating effect */
         @keyframes float {
             0% { transform: translateY(0px) translateX(0px) rotate(-2deg); }
-            100% { transform: translateY(20px) translateX(-15px) rotate(2deg); }
+            50% { transform: translateY(-20px) translateX(10px) rotate(2deg); }
+            100% { transform: translateY(0px) translateX(0px) rotate(-2deg); }
         }
-
-        /* Hide some photos on smaller screens to reduce clutter */
-        @media (max-width: 768px) {
-            .mobile-hidden {
-                display: none;
-            }
-        }
-        
-        /* Fix for landscape images that should be portrait */
-        .rotate-90 img {
-            transform: rotate(90deg) scale(1.4); /* Scale to fit portrait frame */
-        }
-
-        /* Modal styles */
-        .modal { transition: opacity 0.25s ease; }
-        .modal-active { display: flex; }
+        .photo-float:nth-child(2) { animation-duration: 18s; animation-delay: -5s; }
+        .photo-float:nth-child(3) { animation-duration: 22s; animation-delay: -2s; }
+        .photo-float:nth-child(4) { animation-duration: 16s; animation-delay: -8s; }
+        .photo-float:nth-child(5) { animation-duration: 20s; animation-delay: -12s; }
+        .photo-float:nth-child(6) { animation-duration: 17s; animation-delay: -3s; }
+        .photo-float:nth-child(7) { animation-duration: 21s; animation-delay: -7s; }
+        .photo-float:nth-child(8) { animation-duration: 19s; animation-delay: -10s; }
+        .photo-float:nth-child(9) { animation-duration: 23s; animation-delay: -1s; }
+        .photo-float:nth-child(10) { animation-duration: 15s; animation-delay: -4s; }
+        .photo-float:nth-child(11) { animation-duration: 24s; animation-delay: -9s; }
+        .photo-float:nth-child(12) { animation-duration: 18s; animation-delay: -6s; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-
-    <!-- Darkening Overlay -->
-    <div class="background-overlay"></div>
-
+<body class="text-gray-800">
+    <div class="background-container"></div>
+    
     <!-- Floating Photos -->
-    <div class="floating-photos-container">
-        <!-- Photo positions are set with inline styles for uniqueness -->
-        <div class="floating-photo mobile-hidden" style="top: 5%; left: 5%; width: 18vw; height: 24vw; max-width: 220px; max-height: 290px; animation-duration: 18s; transform: rotate(-8deg);">
-            <img src="images/boats.jpg" alt="Boats in Tillamook">
-        </div>
-        <div class="floating-photo" style="top: 10%; right: 5%; width: 25vw; height: 14vw; max-width: 350px; max-height: 200px; animation-duration: 22s; transform: rotate(5deg);">
-            <img src="images/74.jpg" alt="Tillamook landscape">
-        </div>
-         <div class="floating-photo" style="top: 40%; left: 12%; width: 15vw; height: 15vw; max-width: 180px; max-height: 180px; animation-duration: 16s; transform: rotate(3deg);">
-            <img src="images/cow-4.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo mobile-hidden" style="bottom: 15%; left: 5%; width: 20vw; height: 10vw; max-width: 280px; max-height: 140px; animation-duration: 25s; transform: rotate(-5deg);">
-            <img src="images/cow-1.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo" style="bottom: 5%; right: 10%; width: 14vw; height: 14vw; max-width: 160px; max-height: 160px; animation-duration: 19s; transform: rotate(8deg);">
-            <img src="images/cow-6.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo mobile-hidden" style="top: 60%; right: 8%; width: 12vw; height: 12vw; max-width: 150px; max-height: 150px; animation-duration: 17s; transform: rotate(-4deg);">
-            <img src="images/cow-2.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo" style="top: 35%; right: 18%; width: 16vw; height: 16vw; max-width: 190px; max-height: 190px; animation-duration: 23s; transform: rotate(10deg);">
-            <img src="images/cow-3.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo mobile-hidden" style="top: 70%; left: 8%; width: 22vw; height: 11vw; max-width: 320px; max-height: 160px; animation-duration: 20s; transform: rotate(6deg);">
-            <img src="images/cow-5.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo" style="bottom: 45%; right: 5%; width: 15vw; height: 20vw; max-width: 180px; max-height: 240px; animation-duration: 18s; transform: rotate(-6deg);">
-            <img src="images/flowers.png" alt="Flowers in Tillamook">
-        </div>
-        <div class="floating-photo mobile-hidden" style="bottom: 5%; left: 45%; width: 10vw; height: 10vw; max-width: 120px; max-height: 120px; animation-duration: 24s; transform: rotate(2deg);">
-            <img src="images/cows7.jpg" alt="Tillamook cows">
-        </div>
-        <div class="floating-photo" style="top: 8%; left: 35%; width: 20vw; height: 10vw; max-width: 280px; max-height: 140px; animation-duration: 15s; transform: rotate(4deg);">
-            <img src="images/cow-10.jpg" alt="Tillamook cow">
-        </div>
-        <div class="floating-photo" style="bottom: 8%; right: 30%; width: 26vw; height: 15vw; max-width: 360px; max-height: 210px; animation-duration: 19s; transform: rotate(7deg);">
-            <img src="images/boats-2.jpg" alt="Boats in Tillamook">
-        </div>
+    <div class="hidden md:block">
+        <img src="images/boats.jpg" class="photo-float w-48 top-1/4 left-8 transform -rotate-6">
+        <img src="images/flowers.png" class="photo-float w-32 top-2/3 left-1/4 transform rotate-3">
+        <img src="images/74.jpg" class="photo-float w-56 top-16 right-1/4 transform rotate-4">
+        <img src="images/boats-2.jpg" class="photo-float w-64 bottom-16 right-32 transform -rotate-3">
+        <img src="images/cow-4.jpg" class="photo-float w-28 top-12 left-1/3 transform rotate-5">
+        <img src="images/cow-3.jpg" class="photo-float w-40 bottom-1/4 left-16 transform -rotate-2">
+        <img src="images/cow-1.jpg" class="photo-float w-48 top-3/4 right-1/4 transform rotate-6">
+        <img src="images/cow-5.jpg" class="photo-float w-36 top-1/2 right-12 transform -rotate-4">
+        <img src="images/cow-10.jpg" class="photo-float w-32 bottom-8 left-1/2 transform -translate-x-1/2 rotate-2">
+        <img src="images/cow-6.jpg" class="photo-float w-24 top-24 right-8 transform rotate-3">
+        <img src="images/cow-2.jpg" class="photo-float w-36 bottom-24 right-1/2 transform rotate-1">
+        <img src="images/cows7.jpg" class="photo-float w-40 top-1/2 left-1/4 transform -rotate-5">
     </div>
 
-    <div class="relative min-h-screen flex flex-col items-center justify-center text-white z-10">
 
-        <!-- Header -->
-        <header class="absolute top-0 left-0 right-0 p-4">
-             <div class="container mx-auto flex justify-end items-center">
-                <nav class="space-x-4 text-white">
-                    <button onclick="openModal('aboutModal')" class="hover:underline">About</button>
-                    <button onclick="openModal('privacyModal')" class="hover:underline">Privacy</button>
-                    <button onclick="openModal('termsModal')" class="hover:underline">Terms</button>
-                </nav>
-            </div>
+    <div class="relative min-h-screen flex flex-col items-center justify-center p-4">
+        <!-- Header Links -->
+        <header class="absolute top-0 right-0 p-6 text-white">
+             <nav class="flex space-x-6 text-lg">
+                <a href="privacy.html" class="hover:underline">Privacy</a>
+                <a href="terms.html" class="hover:underline">Terms</a>
+                <a href="#" class="hover:underline">About</a>
+            </nav>
         </header>
 
-        <!-- Main Content -->
-        <main class="flex-grow flex flex-col items-center justify-center text-center p-4">
-            <div class="bg-white/50 backdrop-blur-lg rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-md md:max-w-lg xl:max-w-2xl w-full text-gray-800">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Want to know what's going on in Tillamook?</h2>
-                <p class="text-xl sm:text-2xl mb-6 font-bold">Ask the cows!</p>
-                
-                <!-- QR Code with less transparent background -->
-                <div class="flex justify-center mb-4">
-                    <div class="bg-white/90 p-2 sm:p-3 rounded-2xl shadow-lg">
-                        <img src="images/854_Cows.png" alt="QR Code to text 854-COWS" class="rounded-lg w-64 h-64 sm:w-72 sm:h-72">
-                    </div>
-                </div>
-
-                <p class="font-bold text-xl">Or text "hello" to</p>
-                <p class="text-3xl font-bold tracking-wider text-green-700">(541) 854-COWS</p>
-                <p class="text-sm text-gray-500">(541-854-2697)</p>
+        <!-- Main Content Card -->
+        <main class="relative z-10 bg-white/50 backdrop-blur-2xl rounded-2xl shadow-2xl p-6 md:p-10 text-center w-full max-w-lg mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Want to know what's going on in Tillamook?</h1>
+            <p class="mt-2 text-xl md:text-2xl text-gray-700">Ask the cows!</p>
+            
+            <div class="mt-6 bg-white/90 backdrop-blur-lg rounded-xl p-4 inline-block">
+                <img src="images/854_Cows.png" alt="QR Code for 854-COWS SMS Service" class="w-48 h-48 md:w-56 md:h-56 mx-auto">
             </div>
-        </main>
 
+            <p class="mt-6 text-lg text-gray-800">Or text "Hello" to</p>
+            <p class="mt-1 text-3xl font-bold text-gray-900 tracking-wider">(541) 854-COWS</p>
+            <p class="text-sm text-gray-600">(541-854-2697)</p>
+        </main>
+        
         <!-- Footer -->
-        <footer class="w-full p-4 text-center text-sm text-white">
+        <footer class="absolute bottom-0 w-full p-4 text-center text-sm text-white">
             © 2025 854cows.com - Your Friendly Neighborhood Cow
         </footer>
     </div>
-
-    <!-- Modals -->
-    <!-- About Modal -->
-    <div id="aboutModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 hidden" onclick="closeModal('aboutModal')">
-        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full m-4 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-6 border-b">
-                <h3 class="text-2xl font-bold">🐄 About 854 COWS</h3>
-            </div>
-            <div class="p-6 space-y-4">
-                <p class="font-bold text-lg">"Your Friendly Neighborhood Cow" - This perfectly captures the project's soul.</p>
-                <p>854 COWS is a love letter to Tillamook County. It's a simple tool built on the idea that technology should connect us to our community, not distract us from it. No apps, no logins, no barriers. Just text a question, and get a helpful answer from the friendliest cows on the Oregon Coast.</p>
-                
-                <div>
-                    <h4 class="font-bold text-xl mt-4 mb-2">Our Core Values</h4>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Simplicity Over Complexity:</strong> If you can text, you can use 854 COWS. It's that easy.</li>
-                        <li><strong>Community Over Commerce:</strong> This is a free resource for locals, tourists, and businesses. We're here to connect people, not to build a sales funnel.</li>
-                        <li><strong>Authenticity Over Generic Tech:</strong> We're proudly Tillamook, not Silicon Valley. We celebrate local knowledge and local character.</li>
-                        <li><strong>Access Over Barriers:</strong> Works on any phone that can text. We aim to bridge the digital divide, not widen it.</li>
-                    </ul>
-                </div>
-                 <div>
-                    <h4 class="font-bold text-xl mt-4 mb-2">The Vision</h4>
-                     <p>854 COWS is a model for community-centered technology. It asks: What if technology made places MORE local, not less? What if the barrier to community information was zero? We believe technology can serve communities without exploiting them, and we're starting right here in Tillamook.</p>
-                </div>
-            </div>
-            <div class="p-4 bg-gray-50 border-t text-right">
-                <button onclick="closeModal('aboutModal')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Modal -->
-    <div id="privacyModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 hidden" onclick="closeModal('privacyModal')">
-         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full m-4 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-6 border-b">
-                <h3 class="text-2xl font-bold">Privacy Policy</h3>
-            </div>
-            <div class="p-6 space-y-4">
-                <p>We take your privacy seriously. Here's our simple promise:</p>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>We only store your phone number to communicate with you via SMS.</li>
-                    <li>We do not share your phone number or conversation history with any third parties.</li>
-                    <li>The content of your messages is used only to understand your request and provide a relevant answer.</li>
-                    <li>We may analyze anonymized query data (e.g., "what are the tide times?") to improve the service, but this data is never linked to your personal phone number.</li>
-                    <li>This is a community project. We are not in the business of selling data.</li>
-                </ul>
-            </div>
-            <div class="p-4 bg-gray-50 border-t text-right">
-                <button onclick="closeModal('privacyModal')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms Modal -->
-    <div id="termsModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 hidden" onclick="closeModal('termsModal')">
-         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full m-4 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-6 border-b">
-                <h3 class="text-2xl font-bold">Terms of Service</h3>
-            </div>
-            <div class="p-6 space-y-4">
-                <p>By using the 854 COWS SMS service, you agree to the following terms:</p>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>The service is provided "as is" and for informational purposes only. While we strive for accuracy, we cannot guarantee all information is correct or up-to-date.</li>
-                    <li>Do not use this service for emergencies. For any emergency, please dial 911.</li>
-                    <li>Standard message and data rates may apply from your carrier.</li>
-                    <li>The service is intended for reasonable, good-faith inquiries. We reserve the right to block users who abuse the service (e.g., spamming, harassment).</li>
-                    <li>These terms may be updated from time to time. Continued use of the service constitutes acceptance of the new terms.</li>
-                </ul>
-            </div>
-            <div class="p-4 bg-gray-50 border-t text-right">
-                <button onclick="closeModal('termsModal')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('hidden');
-            modal.classList.add('modal-active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('hidden');
-            modal.classList.remove('modal-active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal on escape key press
-        document.addEventListener('keydown', function (event) {
-            if (event.key === "Escape") {
-                closeModal('aboutModal');
-                closeModal('privacyModal');
-                closeModal('termsModal');
-            }
-        });
-    </script>
-
 </body>
 </html>
+
