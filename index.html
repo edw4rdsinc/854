@@ -51,6 +51,9 @@
         .photo-float:nth-child(10) { animation-duration: 15s; animation-delay: -4s; }
         .photo-float:nth-child(11) { animation-duration: 24s; animation-delay: -9s; }
         .photo-float:nth-child(12) { animation-duration: 18s; animation-delay: -6s; }
+        .photo-float:nth-child(13) { animation-duration: 25s; animation-delay: -11s; }
+        .photo-float:nth-child(14) { animation-duration: 16s; animation-delay: -13s; }
+        .photo-float:nth-child(15) { animation-duration: 20s; animation-delay: -15s; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -70,6 +73,9 @@
         <img src="images/cow-6.jpg" class="photo-float w-24 top-24 right-8 transform rotate-3">
         <img src="images/cow-2.jpg" class="photo-float w-36 bottom-24 right-1/2 transform rotate-1">
         <img src="images/cows7.jpg" class="photo-float w-40 top-1/2 left-1/4 transform -rotate-5">
+        <img src="images/jersey1.jpg" class="photo-float w-44 top-1/3 right-12 transform rotate-2">
+        <img src="images/jersey2.jpg" class="photo-float w-32 bottom-1/3 left-32 transform -rotate-5">
+        <img src="images/jersey3.jpg" class="photo-float w-36 bottom-12 left-8 transform rotate-3">
     </div>
 
 
@@ -95,6 +101,25 @@
             <p class="mt-6 text-lg text-gray-800">Or text "Hello" to</p>
             <p class="mt-1 text-3xl font-bold text-gray-900 tracking-wider">(541) 854-COWS</p>
             <p class="text-sm text-gray-600">(541-854-2697)</p>
+
+            <!-- Mobile-Only Example Buttons -->
+            <div class="mt-8 md:hidden">
+                <p class="text-lg text-gray-800">Or tap an example:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 text-sm">
+                    <a href="sms:5418542697?&body=What%20are%20the%20restaurant%20specials%20in%20Tillamook%20tonight?" class="block bg-white/70 hover:bg-white/90 text-gray-800 font-semibold py-3 px-4 rounded-lg shadow-md transition-colors">
+                        Restaurant Specials?
+                    </a>
+                    <a href="sms:5418542697?&body=What's%20going%20on%20tonight?" class="block bg-white/70 hover:bg-white/90 text-gray-800 font-semibold py-3 px-4 rounded-lg shadow-md transition-colors">
+                        What's going on tonight?
+                    </a>
+                    <a href="sms:5418542697?&body=What's%20the%20weather%20tomorrow?" class="block bg-white/70 hover:bg-white/90 text-gray-800 font-semibold py-3 px-4 rounded-lg shadow-md transition-colors">
+                        Weather tomorrow?
+                    </a>
+                    <a href="sms:5418542697?&body=When%20is%20high%20tide%20tomorrow?" class="block bg-white/70 hover:bg-white/90 text-gray-800 font-semibold py-3 px-4 rounded-lg shadow-md transition-colors">
+                        High tide tomorrow?
+                    </a>
+                </div>
+            </div>
         </main>
         
         <!-- Footer -->
@@ -104,4 +129,5 @@
     </div>
 </body>
 </html>
+
 
